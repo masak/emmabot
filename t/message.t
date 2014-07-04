@@ -14,7 +14,9 @@ use Emmabot::Report;
         :type<new>
     );
 
-    is ~$report, "<blip blop> just started failing on <X Y>. (<X blop> changed.)";
+    is ~$report,
+        "<blip blop> just started failing on <X Y>. (<X blop> changed.)",
+        "two changes, same backends";
 }
 
 # Two changes, different backends
@@ -28,7 +30,9 @@ use Emmabot::Report;
         :type<new>
     );
 
-    is ~$report, "blip just started failing on X, and blop just started failing on Y. (<X blop> changed.)";
+    is ~$report,
+        "blip just started failing on X, and blop just started failing on Y. (<X blop> changed.)",
+        "two changes, different backends";
 }
 
 done;
