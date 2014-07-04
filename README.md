@@ -9,6 +9,10 @@ Just thinking out loud here.
 * A module turns out to fail today. It didn't fail yesterday. The bot reacts
   by **telling the channel**.
 
+* For each such new failure, as part of the failure message, the bot should
+  also **report what** since yesterday **has changed**: Rakudo, the module
+  itself, or both.
+
 * Many modules fail today that didn't fail yesterday. The bot tells the
   channel, but without flooding the channel; it **links to a text file** with a
   list of failing modules.
