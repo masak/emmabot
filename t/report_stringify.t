@@ -1,11 +1,11 @@
 use v6;
 use Test;
 
-use Emmabot::FailureReport;
+use Emmabot::Report;
 
 # Two changes, same backends
 {
-    my $report = Emmabot::FailureReport.new(
+    my $report = Emmabot::Report.new(
         :failures(
             { :package<blip>, :backend<X Y> },
             { :package<blop>, :backend<X Y>, :changed }
@@ -19,7 +19,7 @@ use Emmabot::FailureReport;
 
 # Two changes, different backends
 {
-    my $report = Emmabot::FailureReport.new(
+    my $report = Emmabot::Report.new(
         :failures(
             { :package<blip>, :backend<X> },
             { :package<blop>, :backend<Y>, :changed }

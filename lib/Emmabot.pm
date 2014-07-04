@@ -1,5 +1,5 @@
 use v6;
-use Emmabot::FailureReport;
+use Emmabot::Report;
 
 class Emmabot;
 
@@ -10,10 +10,10 @@ method do_daily_report {
     my @changed_repos = $.modules.changed_repos().list;
 
     if $.modules.new_failures().list -> @failures {
-        $.channel.report(Emmabot::FailureReport.new(:@failures, :@changed_repos, :type<new>));
+        $.channel.report(Emmabot::Report.new(:@failures, :@changed_repos, :type<new>));
     }
 
     if $.modules.ongoing_failures().list -> @failures {
-        $.channel.report(Emmabot::FailureReport.new(:@failures, :type<ongoing>));
+        $.channel.report(Emmabot::Report.new(:@failures, :type<ongoing>));
     }
 }

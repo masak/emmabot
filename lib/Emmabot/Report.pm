@@ -1,6 +1,6 @@
 use v6;
 
-class Emmabot::FailureReport;
+class Emmabot::Report;
 
 constant SUMMARIZE_AMOUNT = 5;
 
