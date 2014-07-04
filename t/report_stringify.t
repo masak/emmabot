@@ -7,8 +7,8 @@ use Emmabot::Report;
 {
     my $report = Emmabot::Report.new(
         :failures(
-            { :package<blip>, :backend<X Y> },
-            { :package<blop>, :backend<X Y>, :changed }
+            { :module<blip>, :backend<X Y> },
+            { :module<blop>, :backend<X Y>, :changed }
         ),
         :changed_repos<X>,
         :type<new>
@@ -21,8 +21,8 @@ use Emmabot::Report;
 {
     my $report = Emmabot::Report.new(
         :failures(
-            { :package<blip>, :backend<X> },
-            { :package<blop>, :backend<Y>, :changed }
+            { :module<blip>, :backend<X> },
+            { :module<blop>, :backend<Y>, :changed }
         ),
         :changed_repos<X>,
         :type<new>

@@ -17,7 +17,7 @@ method Str {
     my @changed = @.changed_repos;
 
     for @.failures -> $failure {
-        my $module = $failure<package>;
+        my $module = $failure<module>;
         my $backend_group = $failure<backend>.join(" ");
         if $failure<backend>.list > 1 {
             $backend_group = "<$backend_group>";
