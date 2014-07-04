@@ -10,8 +10,8 @@ Just thinking out loud here.
   by **telling the channel**.
 
 * For each such new failure, as part of the failure message, the bot should
-  also **report what** since yesterday **has changed**: Rakudo, the module
-  itself, or both.
+  also **report what** since yesterday **has changed**: the module, Rakudo,
+  NQP, the underlying VM, or any combination of these.
 
 * Also as part of the failure message, the backend(s) should be reported.
 
