@@ -57,7 +57,7 @@ use Emmabot;
     $bot.do_daily_report();
 
     is @reports.elems, 1;
-    is ~@reports[0], "blib just started failing on <X>, and blop just started failing on <Y>. (<X blop> changed.)";
+    is ~@reports[0], "blip just started failing on X, and blop just started failing on Y. (<X blop> changed.)";
 }
 
 done;
