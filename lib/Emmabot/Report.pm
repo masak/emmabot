@@ -8,6 +8,11 @@ has @.failures;
 has @.changed_repos;
 has $.type;
 
+my %FAILURE_MODES =
+    'new'     => 'just started failing',
+    'ongoing' => 'still failing',
+;
+
 method summarized {
     return +@.modules > SUMMARIZE_AMOUNT;
 }
@@ -41,14 +46,8 @@ method Str {
             @backends == 1 ?? @backends[0] !!
             "<@backends.join(' ')>";
 
-        given $.type {
-            when 'new' {
-                $message ~= $sep ~ "$modules just started failing on $backend_group";
-            }
-            when 'ongoing' {
-                $message ~= $sep ~ "$modules still failing on $backend_group";
-            }
-        }
+        my $failure_mode = %FAILURE_MODES{$.type};
+        $message ~= $sep ~ "$modules $failure_mode on $backend_group";
     }
     $message ~= ".";
 
