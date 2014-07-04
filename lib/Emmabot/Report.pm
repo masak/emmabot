@@ -35,15 +35,11 @@ method Str {
         my $last = $i == @backend_groups - 1;
         my $sep = $first ?? "" !! $last ?? ", and " !! ", ";
 
-        my $modules;
-        if (self.summarized) {
-            $modules = +%backend_groups{$backend_group} ~ " modules";
-        } else {
-            $modules = %backend_groups{$backend_group}.join(" ");
-            if %backend_groups{$backend_group}.list > 1 {
-                $modules = "<$modules>";
-            }
-        }
+        my @backends = %backend_groups{$backend_group}.list;
+        my $modules =
+            self.summarized ?? +%backend_groups{$backend_group} ~ " modules" !!
+            @backends == 1 ?? @backends[0] !!
+            "<@backends.join(' ')>";
 
         given $.type {
             when 'new' {
