@@ -13,6 +13,8 @@ Just thinking out loud here.
   also **report what** since yesterday **has changed**: Rakudo, the module
   itself, or both.
 
+* Also as part of the failure message, the backend(s) should be reported.
+
 * Many modules fail today that didn't fail yesterday. The bot tells the
   channel, but without flooding the channel; it **links to a text file** with a
   list of failing modules.
@@ -30,3 +32,7 @@ Just thinking out loud here.
 
 * When asked directly, the bot can **give full information** about the current
   status of a module.
+
+* Very low-priority, but still possibly relevant in the future: if/when we
+  expand beyond just Rakudo Star modules, the bot should also include
+  information about whether or not the module is a Rakudo Star module.
