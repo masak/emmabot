@@ -8,6 +8,9 @@ use Emmabot;
         method new_failures {
             return "blip", "blop";
         }
+	method ongoing_failures {
+            return "foo";
+        }
     };
 
     my @reports;
@@ -21,9 +24,14 @@ use Emmabot;
     my $bot = Emmabot.new(:$modules, :$channel);
     $bot.do_daily_report();
 
-    is @reports.elems, 2;
+    is @reports.elems, 3;
     is @reports[0].module, "blip";
+    is @reports[0].type, "new";
     is @reports[1].module, "blop";
+    is @reports[1].type, "new";
+    is @reports[2].module, "foo";
+    is @reports[2].type, "ongoing";
+    
 }
 
 done;
