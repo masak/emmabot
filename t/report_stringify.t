@@ -60,3 +60,5 @@ use Emmabot;
     is ~ @reports[1], "blib has started failing on <X>, (<X> have changed)";
     is ~ @reports[2], "blop have started failing on <Y>, (<blop> have changed)";
 }
+
+done;
