@@ -97,17 +97,12 @@ use Emmabot;
         }
     };
 
-    my @log;
-    my $log = class {
-        method log($level,$fmt,*@rest) {
-            @log.push(sprintf("$level> $fmt",@rest));
-        }
-    };
-
-    my $bot = Emmabot.new(:$modules, :$channel, :$log);
+    my $bot = Emmabot.new(:$modules, :$channel);
     $bot.do_daily_report();
 
-    is @log.elems, 2;
+    is @reports.elems, 2;
+    is @reports[0].type, "new";
+    is @reports[1].type, "ongoing";
 }
 
 done;
