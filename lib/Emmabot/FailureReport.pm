@@ -6,7 +6,5 @@ has @.modules;
 has $.type;
 
 method summarized {
-  return @.modules > 2 ??
-    "{+@.modules} failed" !!
-    "@.modules failed";
+    True
 }
