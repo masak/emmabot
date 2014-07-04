@@ -5,8 +5,8 @@ use Emmabot;
 
 sub modules(@new, @ongoing) {
     return class {
-        method new_failures { map { hash('module', $_, 'backend', <X>).item }, @new }
-        method ongoing_failures { map { hash('module', $_).item }, @ongoing }
+        method new_failures { map { hash('module' => $_, 'backend' => <X>).item }, @new }
+        method ongoing_failures { map { hash('module' => $_).item }, @ongoing }
         method changed_repos { <X> }
     };
 }
