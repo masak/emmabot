@@ -105,4 +105,28 @@ use Emmabot;
     is @reports[1].type, "ongoing";
 }
 
+{
+    my $modules = class {
+        method new_failures {
+            return "macedonian_consultants";
+        }
+        method ongoing_failures {
+        }
+    };
+
+    my @reports;
+
+    my $channel = class {
+        method report($r) {
+            push @reports, $r;
+        }
+    };
+
+    my $bot = Emmabot.new(:$modules, :$channel);
+    $bot.do_daily_report();
+
+    is @reports.elems, 1;
+    nok @reports[0].summarized;
+}
+
 done;
