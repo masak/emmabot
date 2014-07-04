@@ -23,7 +23,7 @@ use Emmabot;
     my $bot = Emmabot.new(:$modules, :$channel);
     $bot.do_daily_report();
 
-    is @reports.elems, 3;
+    is @reports.elems, 2;
     is @reports[0].module, "blip";
     is @reports[0].type, "new";
     is @reports[1].module, "blop";
