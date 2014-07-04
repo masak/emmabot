@@ -7,11 +7,13 @@ has $.modules;
 has $.channel;
 
 method do_daily_report {
-    if $.modules.new_failures().list -> @modules {
-        $.channel.report(Emmabot::FailureReport.new(:@modules, :type<new>));
+    my @changed_repos = $.modules.changed_repos().list;
+
+    if $.modules.new_failures().list -> @failures {
+        $.channel.report(Emmabot::FailureReport.new(:@failures, :@changed_repos, :type<new>));
     }
 
-    if $.modules.ongoing_failures().list -> @modules {
-        $.channel.report(Emmabot::FailureReport.new(:@modules, :type<ongoing>));
+    if $.modules.ongoing_failures().list -> @failures {
+        $.channel.report(Emmabot::FailureReport.new(:@failures, :type<ongoing>));
     }
 }
