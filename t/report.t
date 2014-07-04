@@ -3,10 +3,10 @@ use Test;
 
 use Emmabot;
 
-sub modules(@new,@ongoing) {
+sub modules(@new, @ongoing) {
     return class {
-        method new_failures { map {{:package{$_},:backend<X>}}, @new }
-        method ongoing_failures { map {{:package{$_}}}, @ongoing }
+        method new_failures { map { hash('module', $_, 'backend', <X>).item }, @new }
+        method ongoing_failures { map { hash('module', $_).item }, @ongoing }
         method changed_repos { <X> }
     };
 }
@@ -92,7 +92,7 @@ sub modules(@new,@ongoing) {
 }
 
 {
-    my $modules = modules([ :package<macedonian_consultants>, :backend<X> ],
+    my $modules = modules([ :module<macedonian_consultants>, :backend<X> ],
                           []);
 
     my @reports;
