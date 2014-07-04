@@ -3,15 +3,17 @@ use Test;
 
 use Emmabot;
 
-{
-    my $modules = class {
-        method new_failures {
-            return "blip", "blop";
-        }
-        method ongoing_failures {
-        }
+sub modules(@new,@ongoing) {
+    return class {
+        method new_failures { map {{:package{$_},:backend<X>}}, @new }
+        method ongoing_failures { map {{:package{$_}}}, @ongoing }
+        method changed_repos { <X> }
     };
+}
 
+{
+    my $modules = modules([<blip blop>],
+                          [<X>]);
     my @reports;
 
     my $channel = class {
@@ -23,19 +25,14 @@ use Emmabot;
     my $bot = Emmabot.new(:$modules, :$channel);
     $bot.do_daily_report();
 
-    is @reports.elems, 1, "one report:";
+    is @reports.elems, 2, "one report:";
     is @reports[0].modules, <blip blop>, "  ...with the right modules";
     is @reports[0].type, "new", "  ...of the right type";
 }
 
 {
-    my $modules = class {
-        method new_failures {
-        }
-        method ongoing_failures {
-            return "foo";
-        }
-    };
+    my $modules = modules([],
+                          [<foo>]);
 
     my @reports;
 
@@ -54,13 +51,8 @@ use Emmabot;
 }
 
 {
-    my $modules = class {
-        method new_failures {
-            return "ohnoes01" .. "ohnoes20";
-        }
-        method ongoing_failures {
-        }
-    };
+    my $modules = modules(["ohnoes01" .. "ohnoes20" ],
+                          []);
 
     my @reports;
 
@@ -80,14 +72,8 @@ use Emmabot;
 }
 
 {
-    my $modules = class {
-        method new_failures {
-            return "ohnoes01" .. "ohnoes04";
-        }
-        method ongoing_failures {
-            return "æsj01";
-        }
-    };
+    my $modules = modules([ "ohnoes01" .. "ohnoes04" ],
+                          [ <æsj01> ]);
 
     my @reports;
 
@@ -106,13 +92,8 @@ use Emmabot;
 }
 
 {
-    my $modules = class {
-        method new_failures {
-            return "macedonian_consultants";
-        }
-        method ongoing_failures {
-        }
-    };
+    my $modules = modules([ :package<macedonian_consultants>, :backend<X> ],
+                          []);
 
     my @reports;
 

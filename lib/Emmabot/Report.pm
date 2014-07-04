@@ -49,3 +49,6 @@ method Str {
     }
     return $message;
 }
+
+method modules { @.failures.map({$_<package>}) }
+
