@@ -7,11 +7,11 @@ has $.modules;
 has $.channel;
 
 method do_daily_report {
-    for $.modules.new_failures() -> $module {
-        $.channel.report(Emmabot::FailureReport.new(:$module, :type<new>));
+    if $.modules.new_failures().list -> @modules {
+        $.channel.report(Emmabot::FailureReport.new(:@modules, :type<new>));
     }
 
-    for $.modules.ongoing_failures() -> $module {
-        $.channel.report(Emmabot::FailureReport.new(:$module, :type<ongoing>));
+    if $.modules.ongoing_failures().list -> @modules {
+        $.channel.report(Emmabot::FailureReport.new(:@modules, :type<ongoing>));
     }
 }

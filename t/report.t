@@ -23,11 +23,9 @@ use Emmabot;
     my $bot = Emmabot.new(:$modules, :$channel);
     $bot.do_daily_report();
 
-    is @reports.elems, 2;
-    is @reports[0].module, "blip";
+    is @reports.elems, 1;
+    is @reports[0].modules, <blip blop>;
     is @reports[0].type, "new";
-    is @reports[1].module, "blop";
-    is @reports[1].type, "new";
 }
 
 {
@@ -51,7 +49,7 @@ use Emmabot;
     $bot.do_daily_report();
 
     is @reports.elems, 1;
-    is @reports[0].module, "foo";
+    is @reports[0].modules, "foo";
     is @reports[0].type, "ongoing";
 }
 
