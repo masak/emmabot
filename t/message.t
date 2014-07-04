@@ -8,10 +8,10 @@ use Emmabot::Report;
     my $report = Emmabot::Report.new(
         :failures(
             { :module<blip>, :backend<X Y> },
-            { :module<blop>, :backend<X Y>, :changed }
+            { :module<blop>, :backend<X Y>, :changed },
         ),
         :changed_repos<X>,
-        :type<new>
+        :type<new>,
     );
 
     is ~$report,
@@ -24,10 +24,10 @@ use Emmabot::Report;
     my $report = Emmabot::Report.new(
         :failures(
             { :module<blip>, :backend<X> },
-            { :module<blop>, :backend<Y>, :changed }
+            { :module<blop>, :backend<Y>, :changed },
         ),
         :changed_repos<X>,
-        :type<new>
+        :type<new>,
     );
 
     is ~$report,
@@ -39,7 +39,7 @@ use Emmabot::Report;
     my $report = Emmabot::Report.new(
         :failures(
             { :module<blip>, :backend<X Y> },
-            { :module<blop>, :backend<X Y>, :changed }
+            { :module<blop>, :backend<X Y>, :changed },
         ),
         :type<ongoing>
     );
