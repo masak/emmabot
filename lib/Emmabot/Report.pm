@@ -50,5 +50,5 @@ method Str {
     return $message;
 }
 
-method modules { @.failures.map({$_<package>}) }
+method modules { @.failures.map({$_<module>}) }
 
