@@ -29,7 +29,7 @@ use Emmabot;
     $bot.do_daily_report();
 
     is @reports.elems, 1;
-    is ~ @reports[1], "blib and blop have started failing on <X Y>, (<X blop> have changed)";
+    is ~@reports[0], "<blip blop> just started failing on <X Y>. (<X blop> changed.)";
 }
 
 # Two changes, different backends
@@ -56,9 +56,8 @@ use Emmabot;
     my $bot = Emmabot.new(:$modules, :$channel);
     $bot.do_daily_report();
 
-    is @reports.elems, 2;
-    is ~ @reports[1], "blib has started failing on <X>, (<X> have changed)";
-    is ~ @reports[2], "blop have started failing on <Y>, (<blop> have changed)";
+    is @reports.elems, 1;
+    is ~@reports[0], "blib just started failing on <X>, and blop just started failing on <Y>. (<X blop> changed.)";
 }
 
 done;
