@@ -35,4 +35,18 @@ use Emmabot::Report;
         "two changes, different backends";
 }
 
+{
+    my $report = Emmabot::Report.new(
+        :failures(
+            { :module<blip>, :backend<X Y> },
+            { :module<blop>, :backend<X Y>, :changed }
+        ),
+        :type<ongoing>
+    );
+
+    is ~$report,
+        "<blip blop> are still failing on <X Y>.",
+        "two modules that still fail on two backends";
+}
+
 done;
