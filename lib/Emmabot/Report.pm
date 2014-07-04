@@ -34,10 +34,17 @@ method Str {
         my $first = $i == 0;
         my $last = $i == @backend_groups - 1;
         my $sep = $first ?? "" !! $last ?? ", and " !! ", ";
-        my $modules = %backend_groups{$backend_group}.join(" ");
-        if %backend_groups{$backend_group}.list > 1 {
-            $modules = "<$modules>";
+
+        my $modules;
+        if (self.summarized) {
+            $modules = +%backend_groups{$backend_group} ~ " modules";
+        } else {
+            $modules = %backend_groups{$backend_group}.join(" ");
+            if %backend_groups{$backend_group}.list > 1 {
+                $modules = "<$modules>";
+            }
         }
+
         given $.type {
             when 'new' {
                 $message ~= $sep ~ "$modules just started failing on $backend_group";
