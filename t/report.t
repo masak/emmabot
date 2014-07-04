@@ -56,6 +56,32 @@ use Emmabot;
 {
     my $modules = class {
         method new_failures {
+            return "ohnoes01" .. "ohnoes20";
+        }
+        method ongoing_failures {
+        }
+    };
+
+    my @reports;
+
+    my $channel = class {
+        method report($r) {
+            push @reports, $r;
+        }
+    };
+
+    my $bot = Emmabot.new(:$modules, :$channel);
+    $bot.do_daily_report();
+
+    is @reports.elems, 1;
+    is +@reports[0].modules, 20;
+    is @reports[0].type, "new";
+    ok @reports[0].summarized;
+}
+
+{
+    my $modules = class {
+        method new_failures {
             return "ohnoes01" .. "ohnoes04";
         }
         method ongoing_failures {
