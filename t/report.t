@@ -56,9 +56,10 @@ use Emmabot;
 {
     my $modules = class {
         method new_failures {
-            return "ohnoes01" .. "ohnoes20";
+            return "ohnoes01" .. "ohnoes04";
         }
         method ongoing_failures {
+            return "æsj01";
         }
     };
 
@@ -70,13 +71,17 @@ use Emmabot;
         }
     };
 
-    my $bot = Emmabot.new(:$modules, :$channel);
+    my @log;
+    my $log = class {
+        method log($level,$fmt,*@rest) {
+            @log.push(sprintf("$level> $fmt",@rest));
+        }
+    };
+
+    my $bot = Emmabot.new(:$modules, :$channel, :$log);
     $bot.do_daily_report();
 
-    is @reports.elems, 1;
-    is +@reports[0].modules, 20;
-    is @reports[0].type, "new";
-    ok @reports[0].summarized;
+    is @log.elems, 2;
 }
 
 done;
