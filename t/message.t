@@ -45,7 +45,7 @@ use Emmabot::Report;
     );
 
     is ~$report,
-        "<blip blop> are still failing on <X Y>.",
+        "<blip blop> still failing on <X Y>.",
         "two modules that still fail on two backends";
 }
 
@@ -63,7 +63,7 @@ use Emmabot::Report;
     );
 
     is ~$report,
-        "6 modules are still failing on <X Y>.",
+        "6 modules still failing on <X Y>.",
         "enough modules failing for summarization to kick in";
 }
 

@@ -50,7 +50,7 @@ method Str {
                 $message ~= $sep ~ "$modules just started failing on $backend_group";
             }
             when 'ongoing' {
-                $message ~= $sep ~ "$modules are still failing on $backend_group";
+                $message ~= $sep ~ "$modules still failing on $backend_group";
             }
         }
     }
