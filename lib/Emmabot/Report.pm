@@ -27,7 +27,6 @@ method Str {
             push @changed, $module;
         }
     }
-
     my @backend_groups = %backend_groups.keys.sort;
 
     my $message = "";
@@ -39,11 +38,18 @@ method Str {
         if %backend_groups{$backend_group}.list > 1 {
             $modules = "<$modules>";
         }
-        $message ~= $sep ~ "$modules just started failing on $backend_group";
+        given $.type {
+            when 'new' {
+                $message ~= $sep ~ "$modules just started failing on $backend_group";
+            }
+            when 'ongoing' {
+                $message ~= $sep ~ "$modules are still failing on $backend_group";
+            }
+        }
     }
     $message ~= ".";
 
-    if @changed {
+    if $.type eq 'new' && @changed {
         my $changed = @changed == 1 ?? @changed[0] !! "<@changed.join(' ')>";
         $message ~= " ($changed changed.)";
     }
