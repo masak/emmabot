@@ -8,7 +8,7 @@ use Emmabot;
         method new_failures {
             return "blip", "blop";
         }
-	method ongoing_failures {
+        method ongoing_failures {
             return "foo";
         }
     };
@@ -31,7 +31,6 @@ use Emmabot;
     is @reports[1].type, "new";
     is @reports[2].module, "foo";
     is @reports[2].type, "ongoing";
-    
 }
 
 done;
