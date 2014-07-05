@@ -5,15 +5,20 @@ use Emmabot;
 
 sub modules(@new, @ongoing) {
     return class {
-        method new_failures { map { hash('module' => $_, 'backend' => <X>).item }, @new }
-        method ongoing_failures { map { hash('module' => $_).item }, @ongoing }
+        method new_failures { @new }
+        method ongoing_failures { @ongoing }
         method changed_repos { <X> }
     };
 }
 
 {
-    my $modules = modules([<blip blop>],
-                          [<X>]);
+    my $modules = modules([
+        { :module<blip>, :backend<X> },
+        { :module<blop>, :backend<Y> },
+    ], [
+        { :module<X> },
+    ]);
+
     my @reports;
 
     my $channel = class {
@@ -31,8 +36,10 @@ sub modules(@new, @ongoing) {
 }
 
 {
-    my $modules = modules([],
-                          [<foo>]);
+    my $modules = modules([
+    ], [
+        { :module<foo> },
+    ]);
 
     my @reports;
 
@@ -51,8 +58,10 @@ sub modules(@new, @ongoing) {
 }
 
 {
-    my $modules = modules(["ohnoes01" .. "ohnoes20" ],
-                          []);
+    my $modules = modules([
+        map { hash("module" => $_, "backend" => "X").item },
+            "ohnoes01" .. "ohnoes20"
+    ], []);
 
     my @reports;
 
@@ -72,8 +81,12 @@ sub modules(@new, @ongoing) {
 }
 
 {
-    my $modules = modules([ "ohnoes01" .. "ohnoes04" ],
-                          [ <æsj01> ]);
+    my $modules = modules([
+        map { hash("module" => $_, "backend" => "X").item },
+            "ohnoes01" .. "ohnoes20"
+    ], [
+        { :module<æsj01> },
+    ]);
 
     my @reports;
 
@@ -92,8 +105,9 @@ sub modules(@new, @ongoing) {
 }
 
 {
-    my $modules = modules([ :module<macedonian_consultants>, :backend<X> ],
-                          []);
+    my $modules = modules([
+        { :module<macedonian_consultants>, :backend<X> },
+    ], []);
 
     my @reports;
 
