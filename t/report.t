@@ -15,9 +15,7 @@ sub modules(@new, @ongoing) {
     my $modules = modules([
         { :module<blip>, :backend<X> },
         { :module<blop>, :backend<Y> },
-    ], [
-        { :module<X> },
-    ]);
+    ], []);
 
     my @reports;
 
@@ -30,7 +28,7 @@ sub modules(@new, @ongoing) {
     my $bot = Emmabot.new(:$modules, :$channel);
     $bot.do_daily_report();
 
-    is @reports.elems, 2, "one report:";
+    is @reports.elems, 1, "one report:";
     is @reports[0].modules, <blip blop>, "  ...with the right modules";
     is @reports[0].type, "new", "  ...of the right type";
 }
