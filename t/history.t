@@ -21,7 +21,7 @@ sub modules(@new, @ongoing) {
     $bot.do_daily_report();
     $hist.add($bot);
 
-    is $hist.consecutive_failure_count('blop'), 1, "consecutive_failure_count with one run";
+    is $hist.streak('blop'), 1, "streak after one run";
 }
 
 done;
