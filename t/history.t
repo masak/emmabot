@@ -1,6 +1,7 @@
 use v6;
 use Test;
 
+use Emmabot;
 use Emmabot::History;
 
 sub modules(@new, @ongoing) {
