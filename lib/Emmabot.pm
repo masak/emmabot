@@ -14,6 +14,7 @@ method do_daily_report {
     }
 
     if $.modules.ongoing_failures().list -> @failures {
-        $.channel.report(Emmabot::Report.new(:@failures, :type<ongoing>));
+        my $streak = max @failures»<streak>;
+        $.channel.report(Emmabot::Report.new(:@failures, :type<ongoing>, :$streak));
     }
 }

@@ -36,7 +36,8 @@ sub modules(@new, @ongoing) {
 {
     my $modules = modules([
     ], [
-        { :module<foo> },
+        { :module<foo>, :streak(5) },
+        { :module<bar>, :streak(3) },
     ]);
 
     my @reports;
@@ -51,8 +52,9 @@ sub modules(@new, @ongoing) {
     $bot.do_daily_report();
 
     is @reports.elems, 1, "one report:";
-    is @reports[0].modules, "foo", "  ...with the right modules";
+    is @reports[0].modules, "foo bar", "  ...with the right modules";
     is @reports[0].type, "ongoing", "  ...of the right type";
+    is @reports[0].streak, 5, "  ...with a streak that's the max of all modules'";
 }
 
 {
@@ -83,7 +85,7 @@ sub modules(@new, @ongoing) {
         map { hash("module" => $_, "backend" => "X").item },
             "ohnoes01" .. "ohnoes20"
     ], [
-        { :module<æsj01> },
+        { :module<æsj01>, :streak(1) },
     ]);
 
     my @reports;

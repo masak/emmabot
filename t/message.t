@@ -42,10 +42,11 @@ use Emmabot::Report;
             { :module<blop>, :backend<X Y>, :changed },
         ),
         :type<ongoing>,
+        :streak(42),
     );
 
     is ~$report,
-        "<blip blop> still failing on <X Y>.",
+        "<blip blop> still failing on <X Y>. (Day 42.)",
         "two modules that still fail on two backends";
 }
 
@@ -59,11 +60,12 @@ use Emmabot::Report;
             { :module<z05>, :backend<X Y> },
             { :module<z06>, :backend<X Y> },
         ),
-        :type<ongoing>
+        :type<ongoing>,
+        :streak(11),
     );
 
     is ~$report,
-        "6 modules still failing on <X Y>.",
+        "6 modules still failing on <X Y>. (Day 11.)",
         "enough modules failing for summarization to kick in";
 }
 

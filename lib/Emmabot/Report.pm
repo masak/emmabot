@@ -7,6 +7,7 @@ constant SUMMARIZE_AMOUNT = 5;
 has @.failures;
 has @.changed_repos;
 has $.type;
+has $.streak;
 
 my %FAILURE_MODES =
     'new'     => 'just started failing',
@@ -55,6 +56,11 @@ method Str {
         my $changed = @changed == 1 ?? @changed[0] !! "<@changed.join(' ')>";
         $message ~= " ($changed changed.)";
     }
+
+    if $.type eq 'ongoing' {
+        $message ~= " (Day $.streak.)";
+    }
+
     return $message;
 }
 
